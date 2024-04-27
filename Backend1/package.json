@@ -1,16 +1,29 @@
 {
   "name": "backend1",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -b",
+    "start": "node dist/index.js",
+    "dev": "nodemon -q src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "nodemonConfig": {
+    "ignore": [
+      ".wwebjs_auth/*",
+      ".wwebjs_cache/*"
+    ]
+  },
   "keywords": [],
-  "author": "",
+  "author": "itsMePrass",
   "license": "ISC",
   "dependencies": {
     "@types/ws": "^8.5.10",
     "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.3"
   }
 }
