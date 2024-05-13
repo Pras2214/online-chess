@@ -1,27 +1,11 @@
-import { WebSocket } from "ws";
-const WebSocketServer = WebSocket.Server;
+import { WebSocketServer } from "ws";
+import { GameManager } from "./GameManager";
 
 const wss = new WebSocketServer({ port: 8080 });
 
-// wss.on('headers', (headers, req) => {
-//     headers.push('Access-Control-Allow-Origin: http://localhost:8080');
-//     // Add other CORS headers as needed
-//   });
+const gameManager = new GameManager();
 
 wss.on("connection", (ws) => {
-  console.log("WebSocket client connected");
-
-  ws.on("message", (message) => {
-    console.log("Received message:", message);
-  });
-
-  ws.on("close", () => {
-    console.log("WebSocket client disconnected");
-  });
+  gameManager.addUser(ws);
+  ws.on("disconnect",()=>gameManager.removeUser(ws))
 });
-
-wss.on("listening", () => {
-  console.log("WebSocket server listening on port 8080");
-});
-
-wss.on("error", (error)=>console.log(error));
