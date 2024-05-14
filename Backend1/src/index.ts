@@ -10,6 +10,12 @@ let count = 0;
 wss.on("connection", (ws) => {
   gameManager.addUser(ws);
   ws.send(`hello ${count++}`);
-  ws.on("disconnect", () => gameManager.removeUser(ws));
-});
+  ws.on("close", () => {
+    console.log("WebSocket connection closed");
+    gameManager.removeUser(ws);
+  });
 
+  ws.on("error", (error) => {
+    console.error("WebSocket error:", error);
+  });
+});
