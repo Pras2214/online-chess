@@ -14,7 +14,10 @@ const Game = () => {
   const [board, setBoard] = useState(chess.board());
 
   useEffect(() => {
-    if (!socket) return;
+    if (!socket) {
+        console.log("Game.tsx socket not made");
+        return;
+    }
     socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
       console.log(message);

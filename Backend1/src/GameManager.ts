@@ -16,6 +16,7 @@ export class GameManager {
   addUser(socket: WebSocket) {
     this.users.push(socket);
     this.addHandler(socket);
+    console.log("Game Manager",this.users);
   }
 
   removeUser(socket: WebSocket) {
