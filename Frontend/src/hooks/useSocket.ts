@@ -7,7 +7,6 @@ const useSocket = () => {
 
   useEffect(() => {
     const ws = new WebSocket(WS_URL);
-    console.log("WebSocket created:", ws, socket);
 
     ws.onopen = () => {
       console.log("WebSocket connection established.");

@@ -3,7 +3,7 @@ const Button = ({ onClick,children }: { onClick: () => void,children:React.React
     <div>
       <button
         onClick={onClick}
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-8 text-2xl rounded"
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-16 text-2xl rounded mt-10"
       >
         {children}
       </button>

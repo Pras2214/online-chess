@@ -15,21 +15,22 @@ const Game = () => {
 
   useEffect(() => {
     if (!socket) {
-        console.log("Game.tsx socket not made");
-        return;
+      console.log("Game.tsx socket not made");
+      return;
     }
     socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
       console.log(message);
       switch (message.type) {
         case INIT_GAME:
-          setChess(new Chess());
+          // setChess(new Chess());
           setBoard(chess.board());
           console.log("Game initialized");
           break;
 
         case MOVE:
           const move = message.payload;
+          console.log(message.payload);
           chess.move(move);
           setBoard(chess.board());
           console.log("Move made");
@@ -50,10 +51,10 @@ const Game = () => {
     <div className="flex justify-center">
       <div className="pt-8 max-w-screen-lg w-full">
         <div className="grid grid-cols-6 gap-4 w-full">
-          <div className="col-span-4 bg-red-200 w-full">
-            <ChessBoard board={board}/>
+          <div className="col-span-4 w-full flex justify-center">
+            <ChessBoard chess={chess} setBoard={setBoard} board={board} socket={socket} />
           </div>
-          <div className="col-span-2 bg-green-200 w-full">
+          <div className="col-span-2 bg-slate-800 w-full flex justify-center">
             <Button
               onClick={() => {
                 socket.send(JSON.stringify({ type: INIT_GAME }));

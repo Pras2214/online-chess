@@ -16,7 +16,6 @@ export class GameManager {
   addUser(socket: WebSocket) {
     this.users.push(socket);
     this.addHandler(socket);
-    console.log("Game Manager",this.users);
   }
 
   removeUser(socket: WebSocket) {
@@ -43,7 +42,8 @@ export class GameManager {
         );
 
         if (game) {
-          game.makeMove(socket, message.move);
+          console.log(message.payload.move);
+          game.makeMove(socket, message.payload.move);
         }
       }
     });
